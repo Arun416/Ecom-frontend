@@ -1,0 +1,89 @@
+<!-- <div>
+  <h1>{{product.name}}</h1>
+  <img [src]="product.image" width="300px" height="200px"/>
+  <h4>Price: {{product.price}}</h4>
+</div> -->
+<div class="container">
+<div class="d-flex flex-row bd-highlight mb-3">
+  <div class="p-4 bd-highlight">
+    <img  class="border border-2 p-4"  [src]="product.image" width="500px" height="400px"/>
+  </div>
+  <div class="p-4 bd-highlight">
+    <h1 class="mat-subheading-2"><b>{{product.name}}</b></h1>
+    <div class="mt-2 pt-2">
+      <p>{{product.description}}</p>
+    </div>
+    <div>
+      <span class = "fa fa-star checked"></span>
+      <span class = "fa fa-star checked"></span>
+      <span class = "fa fa-star checked"></span>
+      <span class = "fa fa-star checked"></span>
+      <!-- To display unchecked star rating icons -->
+      <span class = "fa fa-star unchecked"></span>
+      <a class="px-2" href="fwff">5 reviews</a>
+    </div>
+    <div class="d-flex justify-content-between mt-3">
+      <div>
+        <h2>
+          <span class="material-icons  fs-3">
+          currency_rupee</span>
+          {{product.price}}.00
+        </h2>
+      </div>
+
+      <div>
+        <h3>IN STOCK</h3>
+      </div>
+    </div>
+    <hr/>
+    <div>
+      <label>Qty</label><br/>
+      <mat-form-field appearance="outline">
+        <input type="number" matInput [value]="product.quantity" min="1"/>
+      </mat-form-field>
+  </div>
+
+      <button mat-raised-button class="action-button">
+        <span class="material-icons">
+          shopping_bag
+        </span>
+        Buy Now
+      </button>
+      <span class="p-2">
+      <button mat-raised-button class="action-button px-3" color="primary">
+        <span class="material-icons">
+        shopping_cart
+        </span>
+        Add to Cart</button>
+    </span>
+    <div class="border border-2 p-4 mt-4 pt-4">
+      <h2>Size</h2>
+
+      <mat-button-toggle-group color="primary">
+        <mat-button-toggle value="Small">Small</mat-button-toggle>
+        <mat-button-toggle value="Medium">Medium</mat-button-toggle>
+        <mat-button-toggle value="Large">Large</mat-button-toggle>
+        <mat-button-toggle value="XL">XL</mat-button-toggle>
+        <mat-button-toggle value="XL">XXL</mat-button-toggle>
+      </mat-button-toggle-group>
+  </div>
+  <div class="border border-2 p-4 mt-4 pt-4">
+    <h2>Product Details</h2>
+    <p>Name: {{product.name}}</p>
+    <p>Product description: {{product.description}}</p>
+    <p>Fabric : Cotton</p>
+    <p>Pattern : Solid</p>
+    <p>Net Quantity (N) : {{product.quantity}}</p>
+  </div>
+  </div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+

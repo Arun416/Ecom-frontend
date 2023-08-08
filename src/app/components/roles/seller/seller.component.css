@@ -1,0 +1,10 @@
+.add-product-button {
+  justify-content: end;
+  display: flex;
+  position: relative;
+}
+
+.search-product {
+  display: flex;
+  justify-content: center;
+ }

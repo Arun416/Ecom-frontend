@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <!--  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+     <mat-icon>menu</mat-icon>
+   </button> -->
+   <span>Ecom-App</span>
+   <span class="example-spacer"></span>
+   <button mat-button routerLink="/">Home</button>
+   <form class="d-flex">
+    <button *ngIf="loggedIn()" mat-button [matMenuTriggerFor]="menu">
+      Hello {{getUserData().username|uppercase}}
+      <span class="material-icons">
+        arrow_drop_down
+        </span>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Dashboard</button>
+        <button mat-menu-item routerLink="/profile">Profile</button>
+      </mat-menu>
+
+      </button>
+
+    <button class="btn btn-outline-light" type="submit">
+        <i class="bi-cart-fill me-1"></i>
+        Cart
+        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+    </button>
+</form>
+   <button mat-button  *ngIf="!loggedIn()" routerLink="/login">Login</button>
+   <button mat-button  *ngIf="loggedIn()" (click)="logoutUser()">Logout</button>
+ </mat-toolbar>

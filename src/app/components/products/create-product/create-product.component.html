@@ -1,0 +1,27 @@
+<div class="form-container">
+  <h1>Create a Product</h1>
+  <form [formGroup]="addProductFormGroup" (ngSubmit)="addProducts(addProductFormGroup.value)">
+  <mat-form-field appearance="fill">
+    <mat-label>Product Name</mat-label>
+    <input matInput placeholder="Enter product name" formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput placeholder="Enter product description" formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Price</mat-label>
+    <input matInput type="number" placeholder="Enter product price" formControlName="price">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Product Image URL</mat-label>
+    <input matInput placeholder="Enter product Image URL" formControlName="image">
+  </mat-form-field>
+
+
+  <button mat-raised-button color="primary">Add Product</button>
+</form>
+</div>

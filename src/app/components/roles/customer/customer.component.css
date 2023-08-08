@@ -1,0 +1,11 @@
+button.active {
+  color: white;
+ }
+
+ .search-product {
+  justify-content: left;
+ }
+
+ .card {
+  cursor: pointer;
+ }
