@@ -10,13 +10,15 @@ export class ProductService {
 
   constructor(private http:HttpClient) { }
 
-  getProducts(token:any){
+  getProducts(token:any,categoryQuery:any){
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization': `Bearer ${token}`
     })
-    return this.http.get(`${BASE_URL}/product`,{headers: headers});
+    const params = new HttpParams().set('category', categoryQuery);
+    return this.http.get(`${BASE_URL}/product`,{params,headers: headers});
   }
+
 
   getProduct(token:any,product_Id:any)  {
     const headers = new HttpHeaders({
@@ -58,5 +60,8 @@ export class ProductService {
     const params = new HttpParams().set('name', query);
     return this.http.get(`${BASE_URL}/search-product`,{params,headers: headers});
   }
+
+
+
 
 }

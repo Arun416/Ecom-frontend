@@ -18,6 +18,16 @@
           <input matInput #searchProd [(ngModel)]="searchTerm" (input)="onSearchProduct(searchProd)" placeholder="Search Products by name" />
           <mat-icon matPrefix>search</mat-icon>
         </mat-form-field>
+        <br/>
+        <mat-button-toggle-group
+              name="fontStyle" aria-label="Font Style"
+              [(ngModel)]="selectedCategory"
+              (ngModelChange)="onCategoryChange($event)"
+          >
+          <mat-button-toggle *ngFor="let category of categories" [value]="category">{{category}}</mat-button-toggle>
+        </mat-button-toggle-group>
+
+
       </div>
       <div class="pull-right align-items-end" style="float: right;">
         <!-- <span class="material-icons pt-1">sort</span> -->

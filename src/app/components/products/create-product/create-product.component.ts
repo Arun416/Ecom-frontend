@@ -21,13 +21,14 @@ export class CreateProductComponent implements OnInit {
       description:'',
       quantity:1,
       price:'',
+      category:'',
       image:''
     })
   }
 
   getProducts(){
     const token = localStorage.getItem("auth")
-    this.ProductService.getProducts(token).subscribe({
+    this.ProductService.getProducts(token,'').subscribe({
       next:res=>{console.log(res);
       }
     })

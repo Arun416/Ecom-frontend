@@ -32,6 +32,7 @@ import { MatTabsModule} from '@angular/material/tabs';
 import { ViewProductComponent } from './components/products/view-product/view-product.component';
 import { SearchproductPipe } from './helpers/searchproduct.pipe';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatCardModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

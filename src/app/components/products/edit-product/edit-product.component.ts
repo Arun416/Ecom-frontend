@@ -23,6 +23,7 @@ export class EditProductComponent implements OnInit {
       name:'',
       description:'',
       price:'',
+      category:'',
       image:''
     })
   }
@@ -36,6 +37,7 @@ export class EditProductComponent implements OnInit {
           name: response.product.name,
           description:response.product.description,
           price:response.product.price,
+          category:response.product.category,
           image:response.product.image
         })
       }

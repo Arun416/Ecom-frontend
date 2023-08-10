@@ -28,6 +28,9 @@ export class CustomerComponent implements OnInit {
   searchTerm:string ='';
   productList:any;
 
+  categories: string[] = ['AllProducts','tshirts', 'bags', 'shirts'];
+  selectedCategory: string = '';
+
   constructor(private authservice:AuthService,
     private productService:ProductService,
     public dialog: MatDialog,
@@ -50,12 +53,34 @@ export class CustomerComponent implements OnInit {
 
   getAllProducts()  {
     const token = localStorage.getItem("auth")
-    this.productService.getProducts(token).subscribe({
+    this.productService.getProducts(token,'').subscribe({
     next:(res:any)=>{
     this.productList = res
     this.products = res.product
     }
     })
+  }
+
+  onCategoryChange(selectedCategory: string) {
+    // You can perform any action here, like fetching products based on the selected category
+    console.log('Selected category:', selectedCategory);
+    const token = localStorage.getItem("auth")
+    if(selectedCategory === 'AllProducts'){
+      this.productService.getProducts(token,'').subscribe({
+        next:(res:any)=>{
+        this.productList = res
+        this.products = res.product
+        }
+        })
+    }
+    else{
+    this.productService.getProducts(token,selectedCategory).subscribe({
+    next:(res:any)=>{
+    this.productList = res
+    this.products = res.product
+    }
+    }) 
+  }
   }
 
   viewProduct(id:any){

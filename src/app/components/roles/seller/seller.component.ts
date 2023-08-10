@@ -40,7 +40,7 @@ export class SellerComponent implements OnInit {
 
   getAllProducts()  {
     const token = localStorage.getItem("auth")
-    this.productService.getProducts(token).subscribe({
+    this.productService.getProducts(token,'').subscribe({
       next:(res:any)=>{
         this.products = res.product
         console.log(this.products);
