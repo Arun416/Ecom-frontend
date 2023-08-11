@@ -12,7 +12,7 @@
 <section class="py-5" *ngIf="userRole === 'seller'">
   <div class="container px-4 px-lg-5 mt-5">
     <div class="justify-content-center search-product mb-3">
-      <mat-form-field appearance="outline" class="w-100">
+      <mat-form-field appearance="outline" class="w-40">
         <input matInput placeholder="Search Products.." />
         <mat-icon matPrefix>search</mat-icon>
       </mat-form-field>
@@ -21,7 +21,7 @@
     <button mat-raised-button color="primary" routerLink="/add-product"><span class="material-icons">add</span>Create New Product</button>
     </div>
       <div>
-        <h3>{{products.length}} items Found</h3>
+        <h3>{{products?.length}} items Found</h3>
         <hr/>
       </div>
       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -34,9 +34,18 @@
                       <div class="text-center">
                           <!-- Product name-->
                           <h4 class="fw-bolder">{{product.name}}</h4>
+                          <div class="d-flex justify-content-center small text-warning mb-2">
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                        </div>
                           <!-- Product price-->
-                         <h3>Price: <span class="material-icons" style="font-size: 16px;">
-                          currency_rupee</span>{{product.price}}</h3>
+                          <span class="text-muted text-decoration-line-through"> <span class="material-icons" style="font-size: 16px;vertical-align: middle;">
+                            currency_rupee</span> 1000.00</span>
+                          <span class="material-icons" style="font-size: 16px;vertical-align: middle;">
+                            currency_rupee</span>{{product.price}}
                       </div>
                   </div>
                   <!-- Product actions-->

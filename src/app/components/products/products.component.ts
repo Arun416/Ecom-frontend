@@ -17,6 +17,8 @@ export class ProductsComponent implements OnInit {
   products:any;
   userRole:any;
   id:any;
+  loading:boolean = false;
+
 
   constructor(private authservice:AuthService,
               private productService:ProductService,
@@ -31,6 +33,7 @@ export class ProductsComponent implements OnInit {
         next:(res:any)=>{
           this.userRole = res.data.role
           this.message = `Hey Seller, ${res.data.username}`
+
         },
         error:(err)=>{
             this.message = "you are not logged in"

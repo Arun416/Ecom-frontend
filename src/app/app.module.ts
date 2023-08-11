@@ -33,6 +33,10 @@ import { ViewProductComponent } from './components/products/view-product/view-pr
 import { SearchproductPipe } from './helpers/searchproduct.pipe';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatChipsModule} from '@angular/material/chips';
+import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -50,6 +54,8 @@ import {MatChipsModule} from '@angular/material/chips';
     CustomerComponent,
     ViewProductComponent,
     SearchproductPipe,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +76,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatSnackBarModule,
     MatTabsModule,
     MatButtonToggleModule,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

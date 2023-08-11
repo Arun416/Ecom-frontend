@@ -1,4 +1,4 @@
-<div class="container login-container  mt-4">
+<div class="container login-container  mt-4 mat-typography">
   <mat-card>
   <div class="row">
       <form [formGroup]="LoginFormGroup" (ngSubmit)="onLoginSubmit(LoginFormGroup.value)" class="Login-form  align-items-center mt-4">
@@ -16,7 +16,13 @@
             </mat-form-field>
           </div>
           <div class="col-md-12">
-           <button mat-flat-button color="primary">Login</button>
+           <button mat-flat-button color="primary">
+            <span *ngIf="loading">
+              <div class="spinner-border text-light" role="status" style="width: 30px;height: 30px;">
+                <span class="visually-hidden">Login...</span>
+              </div>
+            </span>
+            Login</button>
           </div>
           <div class="text-left mt-3 d-flex justify-content-between" style="float: right;display: flex;">
             <div>

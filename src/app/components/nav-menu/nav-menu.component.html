@@ -1,12 +1,22 @@
 <mat-toolbar color="primary">
-  <!--  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-     <mat-icon>menu</mat-icon>
-   </button> -->
-   <span>Ecom-App</span>
+   <span class="ecom-brand">Ecom-App</span>
+   <span class="link-spacer"></span>
+   <button mat-button routerLink="/">
+    <span class="material-icons">
+    home
+    </span>
+    Home</button>
+    <button mat-button routerLink="/about">
+      <span class="material-icons">
+        group
+      </span>
+    About</button>
    <span class="example-spacer"></span>
-   <button mat-button routerLink="/">Home</button>
    <form class="d-flex">
     <button *ngIf="loggedIn()" mat-button [matMenuTriggerFor]="menu">
+      <span class="material-icons">
+        account_circle
+        </span>
       Hello {{getUserData().username|uppercase}}
       <span class="material-icons">
         arrow_drop_down
@@ -15,15 +25,24 @@
         <button mat-menu-item>Dashboard</button>
         <button mat-menu-item routerLink="/profile">Profile</button>
       </mat-menu>
-
       </button>
 
-    <button class="btn btn-outline-light" type="submit">
+    <button class="btn btn-outline-light" type="submit" *ngIf="user_role === 'user'">
         <i class="bi-cart-fill me-1"></i>
         Cart
-        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+        <span class="badge bg-dark text-white ms-1 rounded-pill">{{cart_item?.length}}</span>
     </button>
 </form>
-   <button mat-button  *ngIf="!loggedIn()" routerLink="/login">Login</button>
-   <button mat-button  *ngIf="loggedIn()" (click)="logoutUser()">Logout</button>
+   <button mat-button  *ngIf="!loggedIn()" routerLink="/login">
+    <span class="material-icons">
+      login
+    </span>
+    Login
+  </button>
+   <button mat-button  *ngIf="loggedIn()" (click)="logoutUser()">
+    <span class="material-icons">
+      logout
+    </span>
+    Logout
+  </button>
  </mat-toolbar>

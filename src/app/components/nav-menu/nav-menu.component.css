@@ -1,3 +1,11 @@
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.ecom-brand {
+  margin-left: 120px;
+}
+
+.link-spacer {
+  margin-left: 40px;
+}

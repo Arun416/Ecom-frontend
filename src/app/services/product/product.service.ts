@@ -10,6 +10,17 @@ export class ProductService {
 
   constructor(private http:HttpClient) { }
 
+
+
+  showProductsArrivals(categoryQuery:any){
+    const headers = new HttpHeaders({
+      'Content-Type':'application/json',
+    })
+    const params = new HttpParams().set('category', categoryQuery);
+    return this.http.get(`${BASE_URL}/trend-products`,{params,headers: headers});
+  }
+
+
   getProducts(token:any,categoryQuery:any){
     const headers = new HttpHeaders({
       'Content-Type':'application/json',

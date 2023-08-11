@@ -12,8 +12,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class SignupComponent implements OnInit {
   signupFormGroup!:FormGroup;
   loading:boolean= false;
-
   roles = ["admin","seller","user"];
+
   constructor(private fb:FormBuilder,private http:AuthService,private router:Router) { }
 
   ngOnInit(): void {

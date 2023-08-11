@@ -11,6 +11,8 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent implements OnInit {
   LoginFormGroup!:FormGroup;
+  loading:boolean = false;
+
   constructor(private fb: FormBuilder,
     private authService:AuthService,
     private router: Router) { }
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit(formValue:any){
+    this.loading = true;
     this.authService.login(formValue).subscribe({
       next:(res:any)=>{
         let token  = res.token;
@@ -34,6 +37,7 @@ export class LoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000
         })
+        this.loading = false;
         this.router.navigate(['/dashboard']);
     },
     error:error=>{
