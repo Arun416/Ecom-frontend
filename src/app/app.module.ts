@@ -24,7 +24,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { EditProductComponent } from './components/products/edit-product/edit-product.component';
 import { CreateProductComponent } from './components/products/create-product/create-product.component';
 import { MatCardModule} from '@angular/material/card';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { DialogComponent } from './components/confirmation-dialog/dialog/dialog.component';
 import { SellerComponent } from './components/roles/seller/seller.component';
 import { CustomerComponent } from './components/roles/customer/customer.component';
@@ -32,12 +32,14 @@ import { MatTabsModule} from '@angular/material/tabs';
 import { ViewProductComponent } from './components/products/view-product/view-product.component';
 import { SearchproductPipe } from './helpers/searchproduct.pipe';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule} from '@angular/material/chips';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
-
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { CartSidenavComponent } from './components/cart-sidenav/cart-sidenav.component';
+import { MatListModule} from '@angular/material/list';
+import { MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     SearchproductPipe,
     HomeComponent,
     AboutComponent,
+    CartSidenavComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTabsModule,
     MatButtonToggleModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatListModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ProductService } from 'src/app/services/product/product.service';
@@ -8,6 +8,8 @@ import { EditProductComponent } from '../../products/edit-product/edit-product.c
 import { DialogComponent } from '../../confirmation-dialog/dialog/dialog.component';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { token } from 'src/app/helpers/app.consts';
+import { ToggleService } from 'src/app/services/toggle/toggle.service';
+import { MatDrawer } from '@angular/material/sidenav';
 
 
 @Component({
@@ -16,6 +18,7 @@ import { token } from 'src/app/helpers/app.consts';
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
+  @ViewChild(MatDrawer) drawer!: MatDrawer;
   message:any = '';
   products:any;
   userRole:any;
@@ -39,7 +42,9 @@ export class CustomerComponent implements OnInit {
     private cartService:CartService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private drawerService: ToggleService,
+   ) { }
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -53,7 +58,12 @@ export class CustomerComponent implements OnInit {
       this.message = "you are not logged in"
     }
     })
-    this.getCartDetails();
+
+    this.drawerService.getToggleObservable().subscribe(() => {
+      // Toggle the mat-drawer here
+      this.drawer.toggle();
+    });
+
   }
 
   getAllProducts()  {
@@ -115,24 +125,28 @@ export class CustomerComponent implements OnInit {
 //cart functions
 cart_item:any;
 
-getCartDetails(){
-  this.cartService.getCartData(token).subscribe({
-    next:(res:any)=>{
-        console.log(res);
-        this.cart_item = res.cartItems
-    }
-  })
-}
 
 onAddToCart(e:any,prod_id:any,prod_name:any){
   e.stopPropagation();
   const name = {product_name: prod_name}
   this.cartService.addCart(token,prod_id,name).subscribe({
     next:(response:any)=>{
-      console.log(response);
-      alert("Added to Cart"+response?.message)
-      this.getAllProducts()
-      this.getCartDetails()
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: response?.message,
+        showConfirmButton: false,
+        timer: 1000
+      })
+      this.cartService.fetchCartCount(token);
+      this.cartService.getCartData(token).subscribe({
+        next:(res:any)=>{
+            this.cart_item = res.cartItems
+            this.cartService.updateCartCount(res.cartItems.length);
+            this.cartService.fetchCartCount(token);
+            this.cartService.fetchCartItems(token);
+        }
+      })
     },
     error:error=>{
       console.log(error);

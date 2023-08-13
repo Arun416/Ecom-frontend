@@ -27,10 +27,11 @@
       </mat-menu>
       </button>
 
-    <button class="btn btn-outline-light" type="submit" *ngIf="user_role === 'user'">
+    <button class="btn btn-outline-light" type="submit"
+    *ngIf="user_role === 'user'" (click)="toggleDrawer()">
         <i class="bi-cart-fill me-1"></i>
         Cart
-        <span class="badge bg-dark text-white ms-1 rounded-pill">{{cart_item?.length}}</span>
+        <span class="badge bg-danger text-white ms-1 rounded-pill">{{cartItemCount}}</span>
     </button>
 </form>
    <button mat-button  *ngIf="!loggedIn()" routerLink="/login">

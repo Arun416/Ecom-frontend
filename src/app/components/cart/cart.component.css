@@ -1,0 +1,19 @@
+.card-page {
+  justify-content: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  padding: 30px;
+}
+
+tr .mat-mdc-footer-row  td {
+  font-weight: bold;
+}
+
+.EmptyCart_image {
+  display: flex;
+  justify-content: center;
+}

@@ -1,9 +1,13 @@
 
-<div *ngIf="loading">
-  <mat-spinner mode="indeterminate"></mat-spinner>
-</div>
+<mat-drawer-container class="example-container" hasBackdrop="true"  autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" position="end" >
+    <app-cart-sidenav></app-cart-sidenav>
+  </mat-drawer>
+
+
+<div class="ecom-sidenav-content">
 <!-- Header-->
-<header class="bg-dark py-5">
+<!-- <header class="bg-dark py-5">
   <div class="container px-4 px-lg-5 my-5">
       <div class="text-center text-white">
         <h1 class="display-4 fw-bolder">{{message||''}}</h1>
@@ -11,10 +15,13 @@
           <p class="lead fw-normal text-white-50 mb-0">We have lots of awesome products</p>
       </div>
   </div>
-</header>
+</header> -->
  <!--User-->
 <section class="py-5" *ngIf="userRole === 'user'">
   <div class="container px-4 px-lg-5 mt-5">
+    <div *ngIf="loading">
+      <mat-spinner mode="indeterminate"></mat-spinner>
+    </div>
       <h1 class=" text-center mb-4">Our Latest Products</h1>
 
       <div class="justify-content-center search-product mb-3">
@@ -99,4 +106,5 @@
 <!-- Footer-->
 <footer class="py-5 bg-dark">
   <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-</footer>
+</footer></div>
+</mat-drawer-container>

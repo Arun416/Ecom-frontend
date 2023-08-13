@@ -8,6 +8,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CreateProductComponent } from './components/products/create-product/create-product.component';
 import { ViewProductComponent } from './components/products/view-product/view-product.component';
 import { HomeComponent } from './components/home/home.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full' ,},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'profile',component: ProfileComponent},
   {path:'add-product',component: CreateProductComponent},
   {path:'view-product/:id',component: ViewProductComponent},
+  {path:'view-cart', component: CartComponent},
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 

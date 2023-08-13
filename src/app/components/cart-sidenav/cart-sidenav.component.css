@@ -1,0 +1,31 @@
+.cartproductname {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+}
+
+.cartproductname:hover {
+  color: blue;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-button {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  cursor: pointer;
+  background-color: rgba(245, 243, 243, 0.958);
+  opacity: 1;
+
+}
+
+.image-container:hover .hover-button {
+  display: block;
+}

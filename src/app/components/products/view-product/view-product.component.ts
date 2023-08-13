@@ -22,7 +22,7 @@ export class ViewProductComponent implements OnInit {
     let product_id = this.route.snapshot.paramMap.get('id')
     this.productService.getProduct(token,product_id).subscribe({
       next:(response:any)=>{
-        this.product = response.product;
+        this.product = response?.product;
       }
       })
   }

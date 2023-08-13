@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { token } from 'src/app/helpers/app.consts';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
+import { ToggleService } from 'src/app/services/toggle/toggle.service';
 
 
 @Component({
@@ -15,39 +16,38 @@ export class NavMenuComponent implements OnInit {
   loginedUser:any;
   users:any;
   user_role:string;
+  cart_item:any;
+  cartItemCount: number;
+
   constructor(
     private authservice:AuthService,
     private router:Router,
-    private cartService:CartService) { }
+    private cartService:CartService,
+    private drawerService: ToggleService) { }
 
   ngOnInit(): void {
     this.getUserDetails();
     this.getCartDetails();
   }
 
-
   getUserDetails(){
     const token = localStorage.getItem("auth");
     if(token){
       this.authservice.getUsers(token).subscribe({
         next:(res:any)=>{
-                this.users = res.data
-                this.user_role = this.users.role
-                console.log(this.user_role);
-        }
-        })
+            this.users = res.data
+            this.user_role = this.users.role
+        }  })
     }
-
   }
 
-  cart_item:any;
   getCartDetails(){
-    this.cartService.getCartData(token).subscribe({
-      next:(res:any)=>{
-          console.log(res);
-          this.cart_item = res.cartItems
+    this.cartService.getCartCount().subscribe((count) => {
+      this.cartItemCount = count;
+      if(this.cartItemCount === undefined){
+        this.cartItemCount = 0;
       }
-    })
+    });
   }
 
   loggedIn() {
@@ -66,6 +66,11 @@ export class NavMenuComponent implements OnInit {
     else {
       this.router.navigate(['/login'])
     }
+  }
+
+
+  toggleDrawer() {
+    this.drawerService.toggleDrawer();
   }
 
   logoutUser(){
