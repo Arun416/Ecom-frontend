@@ -18,36 +18,19 @@ export class NavMenuComponent implements OnInit {
   user_role:string;
   cart_item:any;
   cartItemCount: number;
+  logIn:any
 
   constructor(
     private authservice:AuthService,
     private router:Router,
     private cartService:CartService,
-    private drawerService: ToggleService) { }
+    private drawerService: ToggleService) {
+      this.logIn =  this.authservice.getToken();
+     }
 
   ngOnInit(): void {
     this.getUserDetails();
     this.getCartDetails();
-  }
-
-  getUserDetails(){
-    const token = localStorage.getItem("auth");
-    if(token){
-      this.authservice.getUsers(token).subscribe({
-        next:(res:any)=>{
-            this.users = res.data
-            this.user_role = this.users.role
-        }  })
-    }
-  }
-
-  getCartDetails(){
-    this.cartService.getCartCount().subscribe((count) => {
-      this.cartItemCount = count;
-      if(this.cartItemCount === undefined){
-        this.cartItemCount = 0;
-      }
-    });
   }
 
   loggedIn() {
@@ -58,6 +41,39 @@ export class NavMenuComponent implements OnInit {
   getUserData(){
     return this.authservice.decodeToken();
   }
+
+   getUserDetails(){
+    /* const tokenid = localStorage.getItem("auth")
+    if(token!==null){
+    this.authservice.getUsers(tokenid).subscribe({
+        next:(res:any)=>{
+            this.users = res.data
+            this.user_role = this.users.role
+            console.log(this.user_role,"role data");
+        }  })
+      } */
+      this.authservice.getUserData().subscribe(res=>{
+        this.user_role = res;
+        const tokenid = localStorage.getItem("auth")
+        if(this.user_role === 'user'){
+        this.cartService.getCartData(tokenid).subscribe({
+          next:(res:any)=>{
+            this.cart_item = res.cartItems
+            console.log(this.cart_item,"data cat");
+
+            this.cartService.updateCartCount(res.cartItems.length);
+            this.cartService.fetchCartItems(token);
+        }
+    }) }
+      })
+  }
+
+  getCartDetails(){
+    this.cartService.getCartCount().subscribe((count) => {
+    this.cartItemCount = count;
+    });
+  }
+
 
   shopProduct(){
     if(this.loggedIn()){

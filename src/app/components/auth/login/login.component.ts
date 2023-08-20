@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import Swal from 'sweetalert2'
+import { CustomerComponent } from '../../roles/customer/customer.component';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +29,6 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.login(formValue).subscribe({
       next:(res:any)=>{
-        let token  = res.token;
-        localStorage.setItem("auth",token);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -38,7 +37,7 @@ export class LoginComponent implements OnInit {
           timer: 2000
         })
         this.loading = false;
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
     },
     error:error=>{
       Swal.fire({

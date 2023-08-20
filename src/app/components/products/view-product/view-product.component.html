@@ -9,9 +9,9 @@
     <img  class="border border-2 p-4"  [src]="product?.image" width="500px" height="400px"/>
   </div>
   <div class="p-4 bd-highlight">
-    <h1 class="mat-subheading-2"><b>{{product.name}}</b></h1>
+    <h1 class="mat-subheading-2"><b>{{product?.name}}</b></h1>
     <div class="mt-2 pt-2">
-      <p>{{product.description}}</p>
+      <p>{{product?.description}}</p>
     </div>
     <div>
       <span class = "fa fa-star checked"></span>
@@ -27,7 +27,7 @@
         <h2>
           <span class="material-icons  fs-3">
           currency_rupee</span>
-          {{product.price}}.00
+          {{product?.price}}.00
         </h2>
       </div>
 
@@ -39,7 +39,7 @@
     <div>
       <label>Qty</label><br/>
       <mat-form-field appearance="outline">
-        <input type="number" matInput [value]="product.quantity" min="1"/>
+        <input type="number" matInput [value]="product?.quantity" min="1"/>
       </mat-form-field>
   </div>
 
@@ -50,7 +50,8 @@
         Buy Now
       </button>
       <span class="p-2">
-      <button mat-raised-button class="action-button px-3" color="primary">
+      <button mat-raised-button class="action-button px-3"
+      color="primary" (click)="onAddToCart($event,product?._id,product?.name)">
         <span class="material-icons">
         shopping_cart
         </span>
@@ -69,11 +70,11 @@
   </div>
   <div class="border border-2 p-4 mt-4 pt-4">
     <h2>Product Details</h2>
-    <p>Name: {{product.name}}</p>
-    <p>Product description: {{product.description}}</p>
+    <p>Name: {{product?.name}}</p>
+    <p>Product description: {{product?.description}}</p>
     <p>Fabric : Cotton</p>
     <p>Pattern : Solid</p>
-    <p>Net Quantity (N) : {{product.quantity}}</p>
+    <p>Net Quantity (N) : {{product?.quantity}}</p>
   </div>
   </div>
 

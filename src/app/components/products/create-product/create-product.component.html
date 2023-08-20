@@ -18,7 +18,20 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Category</mat-label>
-    <input matInput type="text" placeholder="Enter product price" formControlName="category">
+      <mat-select formControlName="category"  >
+        <mat-option *ngFor="let item of categories_list" [value]="item.name" (click)="onClickCategory(item._id)">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+   </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>subCategory</mat-label>
+      <mat-select formControlName="subcategory">
+        <mat-option *ngFor="let food of subCategories_list" [value]="food.sub_category">
+          {{food.sub_category}}
+        </mat-option>
+      </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill">

@@ -12,10 +12,7 @@ export class CartService {
 
   private cartItemsSubject: BehaviorSubject<any> = new BehaviorSubject([]);
 
-  constructor(private http:HttpClient) {
-    this.fetchCartCount(token); // Fetch the initial cart count when the service is initialized
-    this.fetchCartItems(token)
-  }
+  constructor(private http:HttpClient) {}
 
   addCart(token:any,productId:any,productName:any) {
     const headers = new HttpHeaders({
@@ -44,23 +41,20 @@ export class CartService {
     return this.http.delete(`${BASE_URL}/cart/${productId}`,{headers:headers})
   }
 
-
-  getCartCount(): Observable<number> {
-    return this.cartCountSubject.asObservable();
+  Emptycart(token:any){
+    const headers = new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+    return this.http.patch(`${BASE_URL}/cart/empty`,{headers:headers})
   }
 
   updateCartCount(countItems: any) {
     this.cartCountSubject.next(countItems);
   }
 
-  fetchCartCount(token:any) {
-    const headers = new HttpHeaders({
-      'Content-Type':'application/json',
-      'Authorization': `Bearer ${token}`
-    })
-    this.http.get(`${BASE_URL}/cart`,{headers:headers}).subscribe((count:any) => {
-      this.cartCountSubject.next(count?.cartItems.length);
-    });
+  getCartCount(): Observable<number> {
+    return this.cartCountSubject.asObservable();
   }
 
   fetchCartItems(token:any) {
@@ -69,6 +63,7 @@ export class CartService {
       'Authorization': `Bearer ${token}`
     })
     this.http.get(`${BASE_URL}/cart`,{headers:headers}).subscribe((items:any) => {
+      this.cartCountSubject.next(items?.cartItems.length);
       this.cartItemsSubject.next(items?.cartItems);
     });
   }

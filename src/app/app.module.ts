@@ -40,6 +40,9 @@ import { MatSidenavModule} from '@angular/material/sidenav';
 import { CartSidenavComponent } from './components/cart-sidenav/cart-sidenav.component';
 import { MatListModule} from '@angular/material/list';
 import { MatTableModule} from '@angular/material/table';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddCategoryComponent } from './components/products/add-category/add-category.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +62,8 @@ import { MatTableModule} from '@angular/material/table';
     HomeComponent,
     AboutComponent,
     CartSidenavComponent,
+    DashboardComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,

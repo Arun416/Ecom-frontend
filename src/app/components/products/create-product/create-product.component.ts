@@ -11,6 +11,9 @@ import Swal from 'sweetalert2'
 })
 export class CreateProductComponent implements OnInit {
   addProductFormGroup!:FormGroup;
+  categories_list:any;
+  subCategories_list:any;
+
   constructor(private ProductService:ProductService,
               private fb: FormBuilder,
               private router:Router) { }
@@ -22,13 +25,15 @@ export class CreateProductComponent implements OnInit {
       quantity:1,
       price:'',
       category:'',
+      subcategory:'',
       image:''
     })
+    this.getCategories();
   }
 
   getProducts(){
     const token = localStorage.getItem("auth")
-    this.ProductService.getProducts(token,'').subscribe({
+    this.ProductService.getProducts(token).subscribe({
       next:res=>{console.log(res);
       }
     })
@@ -49,6 +54,29 @@ export class CreateProductComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         },
         error:error=>{}
+      })
+  }
+
+
+
+  getCategories() {
+    const token = localStorage.getItem("auth")
+
+    this.ProductService.getCategories(token).subscribe({
+      next:response=>{
+          this.categories_list = response;
+          console.log(response,"cat");
+      }
+    })
+  }
+
+
+  onClickCategory(cat_id:string){
+      const token = localStorage.getItem("auth")
+      this.ProductService.getSubCategories(token,cat_id).subscribe({
+        next:res=>{
+          this.subCategories_list = res
+        }
       })
   }
 

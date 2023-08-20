@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/services/product/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditProductComponent } from '../../products/edit-product/edit-product.component';
 import { DialogComponent } from '../../confirmation-dialog/dialog/dialog.component';
+import { token } from 'src/app/helpers/app.consts';
 
 @Component({
   selector: 'app-seller',
@@ -25,8 +26,8 @@ export class SellerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    const token = localStorage.getItem("auth")
-    this.authservice.getUsers(token).subscribe({
+    const tokenid = localStorage.getItem("auth");
+    this.authservice.getUsers(tokenid).subscribe({
         next:(res:any)=>{
           this.userRole = res.data.role
             this.message = `Hey Seller, ${res.data.username}`
@@ -39,8 +40,8 @@ export class SellerComponent implements OnInit {
 
 
   getAllProducts()  {
-    const token = localStorage.getItem("auth")
-    this.productService.getProducts(token,'').subscribe({
+    const tokenid = localStorage.getItem("auth");
+    this.productService.getProducts(tokenid).subscribe({
       next:(res:any)=>{
         this.products = res.product
         console.log(this.products);
@@ -75,5 +76,8 @@ export class SellerComponent implements OnInit {
     });
   }
 
+  viewProduct(id:any){
+    this.router.navigate(['view-product/'+id])
+  }
 
 }

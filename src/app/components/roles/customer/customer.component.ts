@@ -8,8 +8,7 @@ import { EditProductComponent } from '../../products/edit-product/edit-product.c
 import { DialogComponent } from '../../confirmation-dialog/dialog/dialog.component';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { token } from 'src/app/helpers/app.consts';
-import { ToggleService } from 'src/app/services/toggle/toggle.service';
-import { MatDrawer } from '@angular/material/sidenav';
+import { Product } from 'src/app/models/product.model';
 
 
 @Component({
@@ -18,9 +17,8 @@ import { MatDrawer } from '@angular/material/sidenav';
   styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent implements OnInit {
-  @ViewChild(MatDrawer) drawer!: MatDrawer;
   message:any = '';
-  products:any;
+  products: Product[];
   userRole:any;
   displayMode:any;
   filters = [
@@ -32,9 +30,10 @@ export class CustomerComponent implements OnInit {
   ];
   searchTerm:string ='';
   productList:any;
-  categories: string[] = ['All Products','tshirts', 'bags', 'shirts','shoes'];
+  categories: any;
   selectedCategory: string = '';
   loading:boolean = false
+  cart_item:any;
 
   constructor(
     private authservice:AuthService,
@@ -43,12 +42,13 @@ export class CustomerComponent implements OnInit {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private router: Router,
-    private drawerService: ToggleService,
    ) { }
 
   ngOnInit(): void {
     this.getAllProducts();
-    const token = localStorage.getItem("auth")
+    this.getCartData();
+    this.getCategories();
+     const token = localStorage.getItem("auth")
     this.authservice.getUsers(token).subscribe({
     next:(res:any)=>{
     this.userRole = res.data.role
@@ -58,18 +58,22 @@ export class CustomerComponent implements OnInit {
       this.message = "you are not logged in"
     }
     })
+  }
 
-    this.drawerService.getToggleObservable().subscribe(() => {
-      // Toggle the mat-drawer here
-      this.drawer.toggle();
-    });
+  getCategories() {
+    const token_Id = localStorage.getItem("auth")
+    this.productService.getCategories(token_Id).subscribe({
+      next:response=>{
+          this.categories = response;
 
+      }
+    })
   }
 
   getAllProducts()  {
     this.loading = true
-    const token = localStorage.getItem("auth")
-    this.productService.getProducts(token,'').subscribe({
+    const tokenid = localStorage.getItem("auth");
+    this.productService.getProducts(tokenid).subscribe({
     next:(res:any)=>{
     this.productList = res
     this.products = res.product
@@ -80,24 +84,25 @@ export class CustomerComponent implements OnInit {
 
   onCategoryChange(selectedCategory: string) {
     // You can perform any action here, like fetching products based on the selected category
-    console.log('Selected category:', selectedCategory);
     const token = localStorage.getItem("auth")
-    if(selectedCategory === 'All Products'){
-      this.productService.getProducts(token,'').subscribe({
+      if(selectedCategory === '') {
+      this.productService.getProducts(token).subscribe({
         next:(res:any)=>{
         this.productList = res
         this.products = res.product
         }
         })
-    }
-    else{
-    this.productService.getProducts(token,selectedCategory).subscribe({
-    next:(res:any)=>{
-    this.productList = res
-    this.products = res.product
-    }
-    })
-  }
+      }
+      else {
+      // this.productService.getProducts(token,selectedCategory).subscribe({
+      this.productService.getProducts(token).subscribe({
+        next:(res:any)=>{
+        this.productList = res
+        this.products = res.product.filter((product:any) => product.category === this.selectedCategory);
+      }
+      })
+      }
+
   }
 
   viewProduct(id:any){
@@ -123,7 +128,19 @@ export class CustomerComponent implements OnInit {
 }
 
 //cart functions
-cart_item:any;
+
+getCartData() {
+  const tokenid = localStorage.getItem("auth")
+  if(this.userRole === 'user'){
+  this.cartService.getCartData(tokenid).subscribe({
+    next:(res:any)=>{
+        this.cart_item = res.cartItems
+        console.log(this.cart_item,"data cat");
+        this.cartService.updateCartCount(res.cartItems.length);
+        this.cartService.fetchCartItems(token);
+    }
+}) }
+}
 
 
 onAddToCart(e:any,prod_id:any,prod_name:any){
@@ -138,12 +155,11 @@ onAddToCart(e:any,prod_id:any,prod_name:any){
         showConfirmButton: false,
         timer: 1000
       })
-      this.cartService.fetchCartCount(token);
+       this.cartService.fetchCartItems(token);
       this.cartService.getCartData(token).subscribe({
         next:(res:any)=>{
             this.cart_item = res.cartItems
             this.cartService.updateCartCount(res.cartItems.length);
-            this.cartService.fetchCartCount(token);
             this.cartService.fetchCartItems(token);
         }
       })
@@ -153,6 +169,9 @@ onAddToCart(e:any,prod_id:any,prod_name:any){
     }
   })
 }
+
+
+
 
 
 }

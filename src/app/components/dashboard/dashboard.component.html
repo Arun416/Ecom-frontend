@@ -1,0 +1,15 @@
+<mat-drawer-container class="example-container" hasBackdrop="true"  autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" position="end" *ngIf="userRole === 'user'">
+    <app-cart-sidenav></app-cart-sidenav>
+  </mat-drawer>
+<div class="ecom-sidenav-content">
+  <div class="ecom-sidenav-content">
+   <div *ngIf="userRole === 'seller'">
+    <app-seller></app-seller>
+  </div>
+  <div *ngIf="userRole === 'user'">
+    <app-customer></app-customer>
+  </div>
+</div>
+</div>
+</mat-drawer-container>

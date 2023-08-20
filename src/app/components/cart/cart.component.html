@@ -61,7 +61,7 @@
               <ng-container matColumnDef="Actions">
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let element"> <button mat-icon-button color="warn"><span class="material-icons">delete</span></button> </td>
-                <td mat-footer-cell *matFooterCellDef><button mat-flat-button color="warn">Empty Cart</button></td>
+                <td mat-footer-cell *matFooterCellDef><button mat-flat-button color="warn" (click)="EmptyCartItems()">Empty Cart</button></td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

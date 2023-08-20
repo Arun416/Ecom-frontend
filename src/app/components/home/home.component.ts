@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit {
 
   getAllProducts()  {
     const token = localStorage.getItem("auth")
-    this.productService.showProductsArrivals('').subscribe({
+  /*   this.productService.showProductsArrivals('').subscribe({
     next:(res:any)=>{
     this.productList = res
     this.products = res.product
     }
-    })
+    }) */
   }
 
   viewProduct(){

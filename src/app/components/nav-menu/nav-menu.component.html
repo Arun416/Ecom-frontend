@@ -4,15 +4,20 @@
    <button mat-button routerLink="/">
     <span class="material-icons">
     home
-    </span>
-    Home</button>
+    </span>Home
+    </button>
     <button mat-button routerLink="/about">
       <span class="material-icons">
         group
-      </span>
-    About</button>
+      </span>About
+    </button>
+    <button mat-button routerLink="/addcategory" *ngIf="user_role ==='seller'">
+      <span class="material-icons">
+        add
+      </span>Add category
+    </button>
    <span class="example-spacer"></span>
-   <form class="d-flex">
+   <div class="d-flex">
     <button *ngIf="loggedIn()" mat-button [matMenuTriggerFor]="menu">
       <span class="material-icons">
         account_circle
@@ -22,18 +27,18 @@
         arrow_drop_down
         </span>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Dashboard</button>
+        <button mat-menu-item routerLink="/dashboard">Dashboard</button>
         <button mat-menu-item routerLink="/profile">Profile</button>
       </mat-menu>
       </button>
 
-    <button class="btn btn-outline-light" type="submit"
-    *ngIf="user_role === 'user'" (click)="toggleDrawer()">
+    <button class="btn btn-outline-light"
+    *ngIf="user_role === 'user' && logIn" (click)="toggleDrawer()">
         <i class="bi-cart-fill me-1"></i>
         Cart
         <span class="badge bg-danger text-white ms-1 rounded-pill">{{cartItemCount}}</span>
     </button>
-</form>
+</div>
    <button mat-button  *ngIf="!loggedIn()" routerLink="/login">
     <span class="material-icons">
       login

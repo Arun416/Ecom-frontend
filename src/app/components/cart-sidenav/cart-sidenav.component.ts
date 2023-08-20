@@ -27,14 +27,15 @@ export class CartSidenavComponent implements OnInit {
     });
   }
 
-
   getCartProducts(){
-    this.cartService.getCartData(token).subscribe({
-      next:(res:any)=>{
-        this.cartService.getCartItems().subscribe((items) => {
-          this.cart_Products = items;
-        });  }
-    })
+    if(token!==null){
+      this.cartService.getCartData(token).subscribe({
+        next:(res:any)=>{
+          this.cartService.getCartItems().subscribe((items) => {
+            this.cart_Products = items;
+          });  }
+      })
+  }
   }
 
 
@@ -48,7 +49,6 @@ export class CartSidenavComponent implements OnInit {
           this.cartService.updateCartCount(res.cartItems.length);
           }
       });
-
     })
   }
 

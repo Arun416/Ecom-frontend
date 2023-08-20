@@ -12,15 +12,30 @@ export class CartComponent implements OnInit {
   displayedColumns: string[] = ['Product', 'Name', 'Quantity', 'Price','Actions'];
   constructor(private cartService:CartService) { }
 
-  ngOnInit(): void { this.getCartItemProduct()
+  ngOnInit(): void { this.getCartItemProduct();
   }
 
   getCartItemProduct(){
-    this.cartService.getCartData(token).subscribe({
-      next:(res:any)=>{
-          this.cartItems$ = res?.cartItems
+    if(token!==null){
+
+      this.cartService.getCartData(token).subscribe({
+        next:(res:any)=>{
+            this.cartItems$ = res?.cartItems
+        }
+      })
+    }
+  }
+
+  EmptyCartItems(){
+    const tok_id = localStorage.getItem("auth")
+    console.log(tok_id);
+
+     this.cartService.Emptycart(tok_id).subscribe({
+      next:response=>{
+          console.log(response)
+          this.getCartItemProduct();
       }
-    })
+     })
   }
 
   calculateTotalPrice(): number {
@@ -30,6 +45,8 @@ export class CartComponent implements OnInit {
     }
     return total;
   }
+
+
 
 
 }

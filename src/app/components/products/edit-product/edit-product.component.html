@@ -20,7 +20,22 @@
         </div>
         <div class="col-md-12">
           <mat-form-field appearance="fill">
-            <input matInput placeholder="Product Category" formControlName="category"/>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category"  >
+              <mat-option *ngFor="let item of categories_list" [value]="item.name" (click)="onClickCategory(item._id)">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-12">
+          <mat-form-field appearance="fill">
+            <mat-label>subCategory</mat-label>
+              <mat-select formControlName="subcategory">
+                <mat-option *ngFor="let food of subCategories_list" [value]="food.sub_category">
+                  {{food.sub_category}}
+                </mat-option>
+              </mat-select>
           </mat-form-field>
         </div>
         <div class="col-md-12">

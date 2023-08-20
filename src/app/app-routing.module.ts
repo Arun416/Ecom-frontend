@@ -9,15 +9,19 @@ import { CreateProductComponent } from './components/products/create-product/cre
 import { ViewProductComponent } from './components/products/view-product/view-product.component';
 import { HomeComponent } from './components/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddCategoryComponent } from './components/products/add-category/add-category.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full' ,},
+  // {path: '', redirectTo: '', pathMatch: 'full' ,},
   {path:'login',component:LoginComponent},
   {path:'register',component: SignupComponent},
-  {path:'dashboard', component:ProductsComponent, canActivate: [AuthGuard]},
+  {path:'', component:HomeComponent},
+  {path:'dashboard', component:DashboardComponent, canActivate: [AuthGuard]},
   {path:'profile',component: ProfileComponent},
   {path:'add-product',component: CreateProductComponent},
   {path:'view-product/:id',component: ViewProductComponent},
+  {path:'addcategory',component:AddCategoryComponent},
   {path:'view-cart', component: CartComponent},
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
