@@ -89,7 +89,6 @@ import { AddCategoryComponent } from './components/products/add-category/add-cat
     MatSidenavModule,
     MatListModule,
     MatTableModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

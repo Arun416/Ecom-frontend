@@ -5,7 +5,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import Swal from 'sweetalert2'
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-product',
