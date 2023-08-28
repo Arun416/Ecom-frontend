@@ -28,7 +28,7 @@
               <ng-container matColumnDef="Product">
                 <th mat-header-cell *matHeaderCellDef> Product </th>
                 <td mat-cell *matCellDef="let element" class="p-2">
-                  <img [src]="element.product_id.image" width="80px" height="80px"/>
+                  <img src="http://localhost:5000/images/{{element.product_id.image[0].name}}" width="80px" height="80px"/>
                 </td>
                 <td mat-footer-cell *matFooterCellDef></td>
                 <td mat-footer-cell *matFooterCellDef></td>

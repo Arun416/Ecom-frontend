@@ -56,6 +56,8 @@ export class SellerComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.getAllProducts();
+      this.getAllProducts();
+      this.getAllProducts();
     });
   }
 
@@ -71,8 +73,9 @@ export class SellerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      if(result){
       this. getAllProducts()
+      }
     });
   }
 

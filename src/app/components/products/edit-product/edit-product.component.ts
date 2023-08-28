@@ -26,12 +26,22 @@ export class EditProductComponent implements OnInit {
     this.editProductFormGroup = this.fb.group({
       name:'',
       description:'',
+      quantity:1,
       price:'',
       category:'',
       subcategory:'',
       image: [] as File[]
     });
     this.getCategories();
+    this.getAllProd();
+  }
+
+
+  getAllProd(){
+    const token = localStorage.getItem("auth")
+    this.ProductService.getProducts(token).subscribe(res=>{
+
+    })
   }
 
 
@@ -42,6 +52,7 @@ export class EditProductComponent implements OnInit {
         this.editProductFormGroup.setValue({
           name: response.product.name,
           description:response.product.description,
+          quantity:response.product.quantity,
           price:response.product.price,
           category:response.product.category,
           subcategory: response.product.subcategory,
@@ -78,6 +89,7 @@ export class EditProductComponent implements OnInit {
 
     this.ProductService.updateProduct(token,this.data.id,productData).subscribe({
       next:response=>{
+        this.getAllProd();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -89,11 +101,8 @@ export class EditProductComponent implements OnInit {
     })
   }
 
-
-
   getCategories() {
     const token = localStorage.getItem("auth")
-
     this.ProductService.getCategories(token).subscribe({
       next:response=>{
           this.categories_list = response;

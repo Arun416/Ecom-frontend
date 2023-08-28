@@ -42,6 +42,7 @@ import { MatListModule} from '@angular/material/list';
 import { MatTableModule} from '@angular/material/table';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddCategoryComponent } from './components/products/add-category/add-category.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { AddCategoryComponent } from './components/products/add-category/add-cat
     MatSidenavModule,
     MatListModule,
     MatTableModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

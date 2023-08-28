@@ -5,9 +5,19 @@
 </div> -->
 <div class="container">
 <div class="d-flex flex-row bd-highlight mb-3">
-  <div class="p-4 bd-highlight" *ngFor="let prod of product.image">
+  <ngb-carousel *ngIf="product.image" class="p-4 bd-highlight">
+    <ng-template ngbSlide *ngFor="let prod of product.image">
+      <div class="picsum-img-wrapper">
+        <img src="http://localhost:5000/images/{{prod.name}}" alt="Random first slide" width="500px" height="500px"/>
+      </div>
+      <div class="carousel-caption">
+        <p>Product Image</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <!-- <div class="p-4 bd-highlight" *ngFor="let prod of product.image">
     <img  class="border border-2 p-4"  src="http://localhost:5000/images/{{prod.name}}" width="500px" height="400px"/>
-  </div>
+  </div> -->
   <div class="p-4 bd-highlight">
     <h1 class="mat-subheading-2"><b>{{product?.name}}</b></h1>
     <div class="mt-2 pt-2">

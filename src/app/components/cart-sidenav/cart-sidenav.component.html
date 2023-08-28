@@ -5,7 +5,7 @@
      <div *ngIf="cart_Products?.length>0">
      <div class="d-flex mt-4 pt-1 flex-row justify-content-evenly " *ngFor="let cartitem of cart_Products">
         <div class="image-container">
-          <img [src]="cartitem.product_id.image" width="80px" height="80px"/>
+          <img src="http://localhost:5000/images/{{cartitem.product_id.image[0].name}}" width="80px" height="80px"/>
           <span style="top:28px;right:40px;position: relative;align-items: center;">
           <button mat-icon-button
           class="hover-button"

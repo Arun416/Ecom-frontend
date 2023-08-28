@@ -49,7 +49,6 @@ export class ProductService {
 
   updateProduct(token:any,id:any,productData:any) {
     const headers = new HttpHeaders({
-      'Content-Type':'application/json',
       'Authorization': `Bearer ${token}`
     })
     return this.http.patch("http://localhost:5000/product/"+id,productData,{headers: headers});
