@@ -18,7 +18,7 @@ import { Product } from 'src/app/models/product.model';
 })
 export class CustomerComponent implements OnInit {
   message:any = '';
-  products: Product[];
+  products: any;
   userRole:any;
   displayMode:any;
   filters = [

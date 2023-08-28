@@ -1,6 +1,6 @@
 <div class="form-container">
   <h1>Create a Product</h1>
-  <form [formGroup]="addProductFormGroup" (ngSubmit)="addProducts(addProductFormGroup.value)">
+  <form [formGroup]="addProductFormGroup">
   <mat-form-field appearance="fill">
     <mat-label>Product Name</mat-label>
     <input matInput placeholder="Enter product name" formControlName="name">
@@ -34,12 +34,11 @@
       </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Product Image URL</mat-label>
-    <input matInput placeholder="Enter product Image URL" formControlName="image">
-  </mat-form-field>
+  <div class="mb-3">
+    <input type="file" placeholder="Enter product Image URL" formControlName="image" (change)="onFileChange($event)" multiple >
+  </div>
 
 
-  <button mat-raised-button color="primary">Add Product</button>
+  <button mat-raised-button color="primary" (click)="addProducts($event,addProductFormGroup.value)">Add Product</button>
 </form>
 </div>

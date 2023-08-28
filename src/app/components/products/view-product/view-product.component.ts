@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import Swal from 'sweetalert2'
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-product',
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2'
 export class ViewProductComponent implements OnInit {
   product:any;
   cart_item:any;
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
   constructor(private route: ActivatedRoute,
               private productService:ProductService,

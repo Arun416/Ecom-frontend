@@ -13,6 +13,7 @@ export class CreateProductComponent implements OnInit {
   addProductFormGroup!:FormGroup;
   categories_list:any;
   subCategories_list:any;
+  selectedFiles:any;
 
   constructor(private ProductService:ProductService,
               private fb: FormBuilder,
@@ -26,9 +27,15 @@ export class CreateProductComponent implements OnInit {
       price:'',
       category:'',
       subcategory:'',
-      image:''
+      image: [] as File[]
     })
     this.getCategories();
+  }
+
+  onFileChange(event:any){
+    if(event.target.files.length>0){
+      this.selectedFiles = event.target.files;
+    }
   }
 
   getProducts(){
@@ -39,9 +46,23 @@ export class CreateProductComponent implements OnInit {
     })
   }
 
-  addProducts(prodData:any){
+  addProducts(event:any,prodData:any){
+    event.preventDefault();
+    const productData = new FormData();
+    productData.append('name', this.addProductFormGroup.value.name);
+    productData.append('description', this.addProductFormGroup.value.description);
+    productData.append('quantity', this.addProductFormGroup.value.quantity);
+    productData.append('price', this.addProductFormGroup.value.price);
+    productData.append('category', this.addProductFormGroup.value.category);
+    productData.append('subcategory', this.addProductFormGroup.value.subcategory);
+
+
+    for (let img of this.selectedFiles){
+      productData.append('image',img);
+      }
+
       const token = localStorage.getItem("auth")
-      this.ProductService.addNewProduct(token,prodData).subscribe({
+      this.ProductService.addNewProduct(token,productData).subscribe({
         next: response=>{
           this.getProducts();
           Swal.fire({

@@ -22,13 +22,13 @@ export class ProductService {
   }
 
 
-  getProducts(token:any):Observable<Product[]>{
+  getProducts(token:any){
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization': `Bearer ${token}`
     })
     // const params = new HttpParams().set('category', categoryQuery);
-    return this.http.get<Product[]>(`${BASE_URL}/product`,{headers: headers});
+    return this.http.get(`${BASE_URL}/product`,{headers: headers});
   }
 
 
@@ -40,20 +40,19 @@ export class ProductService {
     return this.http.get("http://localhost:5000/product/"+product_Id,{headers: headers});
   }
 
-  addNewProduct(token:any,productData:Product): Observable<Product> {
+  addNewProduct(token:any,productData:any) {
     const headers = new HttpHeaders({
-      'Content-Type':'application/json',
       'Authorization': `Bearer ${token}`
     })
-    return this.http.post<Product>("http://localhost:5000/product",productData,{headers: headers});
+    return this.http.post("http://localhost:5000/product",productData,{headers: headers});
   }
 
-  updateProduct(token:any,id:any,productData:Product): Observable<Product>{
+  updateProduct(token:any,id:any,productData:any) {
     const headers = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization': `Bearer ${token}`
     })
-    return this.http.patch<Product>("http://localhost:5000/product/"+id,productData,{headers: headers});
+    return this.http.patch("http://localhost:5000/product/"+id,productData,{headers: headers});
   }
 
   deleteProduct(token:any,id:any): Observable<void> {

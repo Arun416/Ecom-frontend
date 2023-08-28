@@ -14,6 +14,7 @@ export class EditProductComponent implements OnInit {
   editProductFormGroup!:FormGroup;
   categories_list:any;
   subCategories_list:any;
+  selectedFiles:any;
 
   constructor(private ProductService:ProductService,
     private fb: FormBuilder,
@@ -28,7 +29,7 @@ export class EditProductComponent implements OnInit {
       price:'',
       category:'',
       subcategory:'',
-      image:''
+      image: [] as File[]
     });
     this.getCategories();
   }
@@ -36,25 +37,43 @@ export class EditProductComponent implements OnInit {
 
   getProduct() {
     const token = localStorage.getItem("auth")
-    this.ProductService.getProduct(token,this.data.id,).subscribe({
+    this.ProductService.getProduct(token,this.data.id).subscribe({
       next:(response:any)=>{
-        console.log(response,"rrr");
-
         this.editProductFormGroup.setValue({
           name: response.product.name,
           description:response.product.description,
           price:response.product.price,
           category:response.product.category,
           subcategory: response.product.subcategory,
-          image:response.product.image
+          image: response.product.image,
         })
       }
     })
   }
 
+  onFileChange(event:any){
+    if(event.target.files.length>0){
+      this.selectedFiles = event.target.files;
+    }
+  }
 
 
-  updateProduct(productData:any){
+  updateProduct(event:any,formData:any){
+
+    event.preventDefault();
+    const productData = new FormData();
+    productData.append('name', this.editProductFormGroup.value.name);
+    productData.append('description', this.editProductFormGroup.value.description);
+    productData.append('quantity', this.editProductFormGroup.value.quantity);
+    productData.append('price', this.editProductFormGroup.value.price);
+    productData.append('category', this.editProductFormGroup.value.category);
+    productData.append('subcategory', this.editProductFormGroup.value.subcategory);
+
+
+    for (let img of this.selectedFiles){
+      productData.append('image',img);
+    }
+
     const token = localStorage.getItem("auth")
 
     this.ProductService.updateProduct(token,this.data.id,productData).subscribe({

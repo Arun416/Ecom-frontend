@@ -88,7 +88,8 @@ import { AddCategoryComponent } from './components/products/add-category/add-cat
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
